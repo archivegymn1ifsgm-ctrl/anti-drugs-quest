@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bw2i0y1bx16t"]
+
+[ext_resource type="Script" uid="uid://c34xewxym8mdq" path="res://Scripts/chat.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bo21s1js1x5sc" path="res://Assets/Backgrounds/chat.png" id="2_bg"]
+[ext_resource type="Script" uid="uid://c7qlbrmrg5ui2" path="res://Scripts/story_player.gd" id="3_cxjgb"]
+
+[node name="Chat" type="Control" unique_id=346862938]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+demo = false
+
+[node name="Background" type="TextureRect" parent="." unique_id=2011212571]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Layout" type="VBoxContainer" parent="." unique_id=256326780]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="MessagesScroll" type="ScrollContainer" parent="Layout" unique_id=781630139]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MessagesMargin" type="MarginContainer" parent="Layout/MessagesScroll" unique_id=357592577]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Messages" type="VBoxContainer" parent="Layout/MessagesScroll/MessagesMargin" unique_id=36976635]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="InputArea" type="PanelContainer" parent="Layout" unique_id=213250179]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InputBox" type="VBoxContainer" parent="Layout/InputArea" unique_id=1383939461]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ChoicesClip" type="Control" parent="Layout/InputArea/InputBox" unique_id=1647534316]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ChoicesMargin" type="MarginContainer" parent="Layout/InputArea/InputBox/ChoicesClip" unique_id=981104271]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="Choices" type="VBoxContainer" parent="Layout/InputArea/InputBox/ChoicesClip/ChoicesMargin" unique_id=996821050]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InputBar" type="Button" parent="Layout/InputArea/InputBox" unique_id=1124475449]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+focus_mode = 0
+text = "Выберите ответ…"
+alignment = 0
+
+[node name="Node" type="Node" parent="." unique_id=1970589175]
+script = ExtResource("3_cxjgb")

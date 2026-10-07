@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/chat_balloon.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bubble"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+
+[node name="ChatBalloon" type="HBoxContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_script")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_bubble")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.105882, 0.105882, 0.105882, 1)
+theme_override_font_sizes/font_size = 22
+autowrap_mode = 3
