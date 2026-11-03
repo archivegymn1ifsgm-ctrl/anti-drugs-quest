@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BubbleStyle" format=3 uid="uid://b6r6eiyuo0ueq"]
+
+[ext_resource type="Script" uid="uid://b0yn2muvp25lh" path="res://Assets/Resources/Bubbles/bubble_style.gd" id="1_wj6yk"]
+
+[resource]
+script = ExtResource("1_wj6yk")
+balloon_alignment = 1
+text_alignment = 1
+color = Color(0.103743516, 0.10374353, 0.103743516, 1)
+opacity = 0.85
+text_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
+pause_before = 1.0
+metadata/_custom_type_script = "uid://b0yn2muvp25lh"

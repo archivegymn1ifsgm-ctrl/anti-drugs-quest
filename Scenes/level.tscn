@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bvvva74k4obbj"]
+
+[ext_resource type="Script" uid="uid://drbfi0lc7qlpt" path="res://Scripts/level.gd" id="1_tumq0"]
+[ext_resource type="PackedScene" uid="uid://ks47sb6edqfa" path="res://Scenes/chat.tscn" id="2_k5f4k"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tumq0"]
+
+[node name="Level" type="Control" unique_id=1539797964]
+material = SubResource("CanvasItemMaterial_tumq0")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tumq0")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1670079228]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Chat" parent="." unique_id=430421942 instance=ExtResource("2_k5f4k")]
+layout_mode = 1

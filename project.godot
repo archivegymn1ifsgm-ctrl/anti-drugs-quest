@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="anti narco quest"
-run/main_scene="res://Scenes/chat.tscn"
+run/main_scene="uid://b80cynkcwnir0"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,10 @@ window/size/viewport_width=548
 window/size/viewport_height=700
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="anti narco quest"
 
 [physics]
 

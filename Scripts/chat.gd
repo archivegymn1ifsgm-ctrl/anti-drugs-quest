@@ -1,3 +1,4 @@
+class_name Chat
 extends Control
 ## Чат: сообщения и панель ввода живут в разных контейнерах.
 ##
@@ -8,14 +9,25 @@ extends Control
 
 signal choice_selected(index: int, text: String)
 
-## Тестовый сценарий. Выключи, когда подключишь сюжет.
-@export var demo: bool = false
 @export var bar_placeholder: String = "Выберите ответ…"
 @export var bar_waiting: String = "…"
 @export var anim_time: float = 0.25
 @export var choice_color := Color("8fd694")
-## Боковые поля вокруг сообщений как доля ширины экрана (0.04 = 4%).
+
 @export_range(0.0, 0.2) var side_margin_ratio: float = 0.04
+
+@export var speaker_styles: Dictionary[String, BubbleStyle] = {
+	"stranger": preload("res://Assets/Resources/Bubbles/stranger_bubble.tres"),
+	"user": preload("res://Assets/Resources/Bubbles/user_bubble.tres"),
+	"system": preload("res://Assets/Resources/Bubbles/system_bubble.tres"),
+	"sos": preload("res://Assets/Resources/Bubbles/sos_bubble.tres")
+}
+@export var player_speaker: String = "user"
+@export var fallback_speaker: String = "system"
+@export var typing_base: float = 0.8
+@export var typing_per_char: float = 0.02
+@export var typing_max: float = 2.5
+@export var message_gap: float = 0.3
 
 @onready var messages_scroll: ScrollContainer = %MessagesScroll
 @onready var messages_box: VBoxContainer = %Messages
@@ -25,12 +37,12 @@ signal choice_selected(index: int, text: String)
 @onready var choices_box: VBoxContainer = %Choices
 @onready var input_bar: Button = %InputBar
 
-var _has_choices := false     # есть ли сейчас варианты ответа
-var _expanded := false        # раскрыта ли панель вариантов
-var _follow_bottom := true    # держать ли список сообщений прижатым к низу
+var _has_choices := false
+var _expanded := false
+var _follow_bottom := true
 var _height_tween: Tween
 var _typing_balloon: ChatBalloon
-var _avail_width := 0.0       # ширина под пузыри (без полей и полосы прокрутки)
+var _avail_width := 0.0
 
 
 func _ready() -> void:
@@ -40,34 +52,44 @@ func _ready() -> void:
 	vbar.changed.connect(_on_scroll_range_changed)
 	vbar.gui_input.connect(_on_scroll_input)
 	messages_scroll.gui_input.connect(_on_scroll_input)
-	messages_scroll.scroll_started.connect(_on_user_scrolled)  # тач-прокрутка
+	messages_scroll.scroll_started.connect(_on_user_scrolled)
 	input_bar.pressed.connect(_on_bar_pressed)
 	messages_scroll.resized.connect(_on_layout_resized)
 
 	choices_clip.custom_minimum_size.y = 0.0
 	_update_bar()
 
-	if demo:
-		choice_selected.connect(_on_demo_choice)
-		_run_demo()
+
+func say(speaker: String, text: String) -> void:
+	var bubble_style := style_for(speaker)
+	if bubble_style.show_typing:
+		show_typing(bubble_style)
+		var wait := minf(typing_base + text.length() * typing_per_char, typing_max)
+		await get_tree().create_timer(wait).timeout
+		hide_typing()
+	elif bubble_style.pause_before > 0.0:
+		await get_tree().create_timer(bubble_style.pause_before).timeout
+	add_message(text, bubble_style)
+	await get_tree().create_timer(message_gap).timeout
 
 
-# ---------- Публичный API ----------
+func style_for(speaker: String) -> BubbleStyle:
+	if speaker_styles.has(speaker):
+		return speaker_styles[speaker]
+	return speaker_styles.get(fallback_speaker)
 
-## Добавить сообщение вниз списка. is_player = true -> справа,
-## is_system = true -> по центру (рассказчик/итог), иначе слева.
-func add_message(text: String, is_player: bool = false, is_system: bool = false) -> void:
-	_spawn_balloon(text, is_player, true, is_system)
+
+func add_message(text: String, bubble_style: BubbleStyle = null) -> void:
+	_spawn_balloon(text, bubble_style if bubble_style else style_for(fallback_speaker), true)
 	_follow_bottom = true
 
 
-## Показать пузырь «печатает…» (три точки). Перед add_message вызови hide_typing().
-func show_typing() -> void:
+func show_typing(bubble_style: BubbleStyle) -> void:
 	if _typing_balloon:
 		return
 	_typing_balloon = BALLOON_SCENE.instantiate()
 	messages_box.add_child(_typing_balloon)
-	_typing_balloon.setup_typing()
+	_typing_balloon.setup_typing(bubble_style)
 	_follow_bottom = true
 
 
@@ -78,7 +100,6 @@ func hide_typing() -> void:
 		_typing_balloon = null
 
 
-## Полностью очистить чат (для перезапуска сюжета).
 func reset() -> void:
 	hide_typing()
 	for b in messages_box.get_children():
@@ -94,7 +115,6 @@ func reset() -> void:
 	_update_bar()
 
 
-## Показать варианты (2-3) и сразу раскрыть панель.
 func show_choices(options: Array) -> void:
 	_clear_choices()
 	_has_choices = not options.is_empty()
@@ -110,23 +130,20 @@ func show_choices(options: Array) -> void:
 	_update_bar()
 	if not _has_choices:
 		return
-	await get_tree().process_frame  # чтобы контейнер пересчитал высоту кнопок
+	await get_tree().process_frame
 	_set_expanded(true)
 
 
-## Убрать варианты (панель сворачивается, полоска остаётся неактивной).
 func hide_choices() -> void:
 	_has_choices = false
 	_set_expanded(false)
 
 
-# ---------- Панель выбора ----------
-
 func _set_expanded(value: bool, animate: bool = true) -> void:
 	value = value and _has_choices
 	_expanded = value
 	if value:
-		_follow_bottom = true  # последние сообщения остаются видны над панелью
+		_follow_bottom = true
 
 	var target := 0.0
 	if value:
@@ -163,7 +180,7 @@ func _on_choice_pressed(index: int, text: String) -> void:
 	for b in choices_box.get_children():
 		b.disabled = true
 	_set_expanded(false)          # панель сворачивается, затем кнопки удаляются
-	add_message(text, true)       # выбранный ответ уходит как сообщение игрока
+	add_message(text, style_for(player_speaker))  # выбранный ответ уходит как сообщение игрока
 	choice_selected.emit(index, text)
 
 
@@ -204,15 +221,11 @@ func _on_scroll_input(event: InputEvent) -> void:
 func _on_user_scrolled() -> void:
 	_follow_bottom = false
 	if _expanded:
-		_set_expanded(false)  # складываем варианты, остаётся только полоска
+		_set_expanded(false)
 
-
-# ---------- Сообщения ----------
 
 const BALLOON_SCENE := preload("res://Scenes/chat_balloon.tscn")
 
-
-## Пересчитывает боковые поля и ширину всех пузырей под текущий размер окна.
 func _on_layout_resized() -> void:
 	var w := messages_scroll.size.x
 	var m := int(w * side_margin_ratio)
@@ -226,10 +239,10 @@ func _on_layout_resized() -> void:
 			(b as ChatBalloon).update_width(_avail_width)
 
 
-func _spawn_balloon(text: String, is_player: bool, animate: bool, is_system: bool = false) -> void:
+func _spawn_balloon(text: String, bubble_style: BubbleStyle, animate: bool) -> void:
 	var balloon: ChatBalloon = BALLOON_SCENE.instantiate()
 	messages_box.add_child(balloon)   # сначала в дерево...
-	balloon.setup(text, is_player, animate, is_system)   # ...потом настройка
+	balloon.setup(text, bubble_style, animate)   # ...потом настройка
 	balloon.update_width(_avail_width)
 
 
@@ -274,20 +287,3 @@ func _apply_button_style(btn: Button, base: Color, hover: Color, radius: int) ->
 	for c in ["font_color", "font_hover_color", "font_pressed_color"]:
 		btn.add_theme_color_override(c, Color("1b1b1b"))
 	btn.add_theme_color_override("font_disabled_color", Color(0.1, 0.1, 0.1, 0.45))
-
-
-# ---------- Демо ----------
-
-func _run_demo() -> void:
-	add_message("Привет! Ты уже видел то письмо?")
-	await get_tree().create_timer(0.7).timeout
-	add_message("Оно пришло сегодня утром, и там была странная подпись. Очень длинное сообщение, чтобы проверить перенос строк внутри пузыря и автоскролл вниз.")
-	await get_tree().create_timer(0.7).timeout
-	show_choices(["Да, видел", "Нет, о чём ты?", "Покажи его мне"])
-
-
-func _on_demo_choice(_index: int, text: String) -> void:
-	await get_tree().create_timer(0.8).timeout
-	add_message("Ты выбрал: «%s». Это тестовая реакция." % text)
-	await get_tree().create_timer(0.7).timeout
-	show_choices(["Продолжить", "Закончить"])

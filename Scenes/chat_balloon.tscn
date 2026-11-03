@@ -1,28 +1,28 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://ccslnmhwa3vsa"]
 
-[ext_resource type="Script" path="res://Scripts/chat_balloon.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cv3hafun70u01" path="res://Scripts/chat_balloon.gd" id="1_as3oc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bubble"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
 
-[node name="ChatBalloon" type="HBoxContainer"]
+[node name="ChatBalloon" type="HBoxContainer" unique_id=2018665258]
 size_flags_horizontal = 3
-script = ExtResource("1_script")
+script = ExtResource("1_as3oc")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=145293214]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_bubble")
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="Label" type="Label" parent="Panel" unique_id=1121574221]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.105882, 0.105882, 0.105882, 1)
 theme_override_font_sizes/font_size = 22
