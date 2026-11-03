@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ks47sb6edqfa"]
+
+[ext_resource type="Script" uid="uid://c0vejbaol6ivr" path="res://Scripts/chat.gd" id="1_pooq6"]
+
+[node name="Chat" type="Control" unique_id=430421942]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pooq6")
+
+[node name="Layout" type="VBoxContainer" parent="." unique_id=1370852416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="MessagesScroll" type="ScrollContainer" parent="Layout" unique_id=235528006]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MessagesMargin" type="MarginContainer" parent="Layout/MessagesScroll" unique_id=1927313501]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Messages" type="VBoxContainer" parent="Layout/MessagesScroll/MessagesMargin" unique_id=6591517]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="InputArea" type="PanelContainer" parent="Layout" unique_id=1091210261]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InputBox" type="VBoxContainer" parent="Layout/InputArea" unique_id=321701717]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ChoicesClip" type="Control" parent="Layout/InputArea/InputBox" unique_id=276589481]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ChoicesMargin" type="MarginContainer" parent="Layout/InputArea/InputBox/ChoicesClip" unique_id=1070122404]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="Choices" type="VBoxContainer" parent="Layout/InputArea/InputBox/ChoicesClip/ChoicesMargin" unique_id=169452934]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InputBar" type="Button" parent="Layout/InputArea/InputBox" unique_id=1196997922]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+focus_mode = 0
+text = "Выберите ответ…"
+alignment = 0

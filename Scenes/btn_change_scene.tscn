@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c5myp6mtwaop3"]
+
+[ext_resource type="Script" uid="uid://3qhq76toc7xt" path="res://Scripts/btn_change_scene.gd" id="1_r3bdv"]
+
+[node name="BtnChangeScene" type="Button" unique_id=1181625670]
+theme_override_font_sizes/font_size = 30
+script = ExtResource("1_r3bdv")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

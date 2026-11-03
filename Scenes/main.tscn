@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://b80cynkcwnir0"]
+
+[ext_resource type="Script" uid="uid://2fhudsundl0w" path="res://Scripts/main.gd" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://c5myp6mtwaop3" path="res://Scenes/btn_change_scene.tscn" id="2_8gbba"]
+[ext_resource type="Resource" uid="uid://drhriodmggj4o" path="res://Assets/Resources/Levels/level1.tres" id="3_jjvhh"]
+
+[node name="Main" type="Control" unique_id=375146099]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jjgbg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=725672375]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.18088591, 0.23309222, 0.43726453, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=336891622]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07755475
+anchor_top = 0.06
+anchor_right = 0.9279197
+anchor_bottom = 0.93142855
+offset_left = 69.5
+offset_right = -69.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=698480683]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Выберите сценарий"
+
+[node name="levels" type="VBoxContainer" parent="VBoxContainer" unique_id=337718017]
+layout_mode = 2
+
+[node name="1" parent="VBoxContainer/levels" unique_id=1181625670 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "1"
+level_info = ExtResource("3_jjvhh")
+
+[node name="2" parent="VBoxContainer/levels" unique_id=753816537 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "2"
+level_info = ExtResource("3_jjvhh")
+
+[node name="3" parent="VBoxContainer/levels" unique_id=496107383 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "3"
+level_info = ExtResource("3_jjvhh")
+
+[node name="4" parent="VBoxContainer/levels" unique_id=1486166149 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "4"
+level_info = ExtResource("3_jjvhh")
+
+[node name="5" parent="VBoxContainer/levels" unique_id=518691175 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "5"
+level_info = ExtResource("3_jjvhh")
+
+[node name="6" parent="VBoxContainer/levels" unique_id=1533377336 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "6"
+level_info = ExtResource("3_jjvhh")
+
+[node name="7" parent="VBoxContainer/levels" unique_id=350071809 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "7"
+level_info = ExtResource("3_jjvhh")
+
+[node name="8" parent="VBoxContainer/levels" unique_id=142977629 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "8"
+level_info = ExtResource("3_jjvhh")
+
+[node name="9" parent="VBoxContainer/levels" unique_id=147388568 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "9"
+level_info = ExtResource("3_jjvhh")
+
+[node name="10" parent="VBoxContainer/levels" unique_id=106287470 instance=ExtResource("2_8gbba")]
+layout_mode = 2
+text = "10"
+level_info = ExtResource("3_jjvhh")
+
+[node name="btnBack" type="Button" parent="." unique_id=922761887]
+z_index = 12
+z_as_relative = false
+layout_mode = 1
+offset_right = 49.0
+offset_bottom = 50.0
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 30
+text = "⬅"
+icon_alignment = 1
+
+[connection signal="level_changed" from="VBoxContainer/levels/1" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/2" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/3" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/4" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/5" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/6" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/7" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/8" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/9" to="." method="_on__level_changed"]
+[connection signal="level_changed" from="VBoxContainer/levels/10" to="." method="_on__level_changed"]
+[connection signal="pressed" from="btnBack" to="." method="_on_btn_back_pressed"]

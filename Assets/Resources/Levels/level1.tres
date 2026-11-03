@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelInfo" format=3 uid="uid://drhriodmggj4o"]
+
+[ext_resource type="Script" uid="uid://j7mvexk2c11b" path="res://Scripts/level_info.gd" id="1_e3f4c"]
+
+[resource]
+script = ExtResource("1_e3f4c")
+script_path = "res://Assets/Story/stranger_danger.json"
+background_path = "uid://bo21s1js1x5sc"
+metadata/_custom_type_script = "uid://j7mvexk2c11b"
