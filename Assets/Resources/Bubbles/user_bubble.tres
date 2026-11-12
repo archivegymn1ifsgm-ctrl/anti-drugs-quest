@@ -7,5 +7,4 @@ script = ExtResource("1_qrakh")
 balloon_alignment = 2
 color = Color(0.7723388, 0.9255881, 0.785777, 1)
 tail = 2
-pause_before = 1.0
 metadata/_custom_type_script = "uid://b0yn2muvp25lh"

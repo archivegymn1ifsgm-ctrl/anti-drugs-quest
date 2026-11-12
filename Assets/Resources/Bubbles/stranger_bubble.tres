@@ -6,5 +6,5 @@
 script = ExtResource("1_e6abi")
 tail = 1
 show_typing = true
-pause_before = 1.0
+pause_before = 1.5
 metadata/_custom_type_script = "uid://b0yn2muvp25lh"

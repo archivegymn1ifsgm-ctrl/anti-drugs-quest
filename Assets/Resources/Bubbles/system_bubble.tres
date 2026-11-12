@@ -9,5 +9,5 @@ text_alignment = 1
 color = Color(0.103743516, 0.10374353, 0.103743516, 1)
 opacity = 0.85
 text_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
-pause_before = 1.0
+pause_before = 1.5
 metadata/_custom_type_script = "uid://b0yn2muvp25lh"

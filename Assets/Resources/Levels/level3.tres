@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelInfo" format=3 uid="uid://c468dek7wxlni"]
+
+[ext_resource type="Script" uid="uid://j7mvexk2c11b" path="res://Scripts/level_info.gd" id="1_4lq5f"]
+
+[resource]
+script = ExtResource("1_4lq5f")
+script_path = "res://Assets/Story/try_w_company.json"
+background_path = "uid://bo21s1js1x5sc"
+metadata/_custom_type_script = "uid://j7mvexk2c11b"

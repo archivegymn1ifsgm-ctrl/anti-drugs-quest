@@ -62,13 +62,16 @@ func _ready() -> void:
 
 func say(speaker: String, text: String) -> void:
 	var bubble_style := style_for(speaker)
+
+	if bubble_style.pause_before > 0.0:
+		await get_tree().create_timer(bubble_style.pause_before).timeout
+
 	if bubble_style.show_typing:
 		show_typing(bubble_style)
 		var wait := minf(typing_base + text.length() * typing_per_char, typing_max)
 		await get_tree().create_timer(wait).timeout
 		hide_typing()
-	elif bubble_style.pause_before > 0.0:
-		await get_tree().create_timer(bubble_style.pause_before).timeout
+
 	add_message(text, bubble_style)
 	await get_tree().create_timer(message_gap).timeout
 
@@ -124,9 +127,11 @@ func show_choices(options: Array) -> void:
 		btn.focus_mode = Control.FOCUS_NONE
 		btn.custom_minimum_size = Vector2(0, 56)
 		btn.add_theme_font_size_override("font_size", 20)
+		btn.clip_contents = false
 		_apply_button_style(btn, choice_color, choice_color.darkened(0.1), 22)
 		btn.pressed.connect(_on_choice_pressed.bind(i, btn.text))
 		choices_box.add_child(btn)
+		
 	_update_bar()
 	if not _has_choices:
 		return
