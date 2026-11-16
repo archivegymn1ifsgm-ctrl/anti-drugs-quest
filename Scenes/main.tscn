@@ -3,6 +3,15 @@
 [ext_resource type="Script" uid="uid://2fhudsundl0w" path="res://Scripts/main.gd" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://c5myp6mtwaop3" path="res://Scenes/btn_change_scene.tscn" id="2_8gbba"]
 [ext_resource type="Resource" uid="uid://drhriodmggj4o" path="res://Assets/Resources/Levels/level1.tres" id="3_jjvhh"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level2.tres" id="4_jjvhh"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level3.tres" id="5_21xkr"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level4.tres" id="6_6bp64"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level5.tres" id="7_6iyac"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level6.tres" id="8_fdnlq"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level7.tres" id="9_jkdf5"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level8.tres" id="10_wsu2k"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level9.tres" id="11_k12tt"]
+[ext_resource type="Resource" path="res://Assets/Resources/Levels/level10.tres" id="12_h1bgf"]
 
 [node name="Main" type="Control" unique_id=375146099]
 layout_mode = 3
@@ -42,7 +51,10 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 32
-text = "Выберите сценарий"
+text = "Веб-квест 
+\"Правовой навигатор\"
+Выберите сценарий"
+horizontal_alignment = 1
 
 [node name="levels" type="VBoxContainer" parent="VBoxContainer" unique_id=337718017]
 layout_mode = 2
@@ -55,47 +67,47 @@ level_info = ExtResource("3_jjvhh")
 [node name="2" parent="VBoxContainer/levels" unique_id=753816537 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "2"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("4_jjvhh")
 
 [node name="3" parent="VBoxContainer/levels" unique_id=496107383 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "3"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("5_21xkr")
 
 [node name="4" parent="VBoxContainer/levels" unique_id=1486166149 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "4"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("6_6bp64")
 
 [node name="5" parent="VBoxContainer/levels" unique_id=518691175 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "5"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("7_6iyac")
 
 [node name="6" parent="VBoxContainer/levels" unique_id=1533377336 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "6"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("8_fdnlq")
 
 [node name="7" parent="VBoxContainer/levels" unique_id=350071809 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "7"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("9_jkdf5")
 
 [node name="8" parent="VBoxContainer/levels" unique_id=142977629 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "8"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("10_wsu2k")
 
 [node name="9" parent="VBoxContainer/levels" unique_id=147388568 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "9"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("11_k12tt")
 
 [node name="10" parent="VBoxContainer/levels" unique_id=106287470 instance=ExtResource("2_8gbba")]
 layout_mode = 2
 text = "10"
-level_info = ExtResource("3_jjvhh")
+level_info = ExtResource("12_h1bgf")
 
 [node name="btnBack" type="Button" parent="." unique_id=922761887]
 z_index = 12
